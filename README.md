@@ -17,12 +17,7 @@
 > _4 Oscillator Syntesizer_
 
 ### WORKFLOW:
-
-1. 
-2. 
-3. 
-
-
+_Gestiremo il lavoro utilizzando_ [GitHub Project Dashboard](https://github.com/users/IronZack95/projects/2)
 
 ### Note per il report:
 - [] 
