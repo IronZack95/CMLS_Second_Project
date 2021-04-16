@@ -2,10 +2,10 @@
  **First Project of Computer Music** \- _Language and Systems_ \- **Homework 2** 
  
  ### Authors \- ***Group 16*** :
-- @https://github.com/IronZack95
-- @https://github.com/Alessandro199762
-- @https://github.com/LorenzoLellini
-- @https://github.com/lucasorini
+- [Zaccaria Eliseo Carrettoni](https://github.com/IronZack95)
+- [Alessandro Zullo](https://github.com/Alessandro199762)
+- [Lorenzo Lellini](https://github.com/LorenzoLellini)
+- [Luca Sorini](https://github.com/lucasorini)
 
 ## JUCE File:
 > Additive Synth
