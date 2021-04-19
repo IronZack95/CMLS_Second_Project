@@ -9,8 +9,14 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
+#define SAMPLE_RATE (44100)
+#ifndef M_PI
+#define M_PI (3.14159265)
+#endif
+
 //==============================================================================
 SynthAudioProcessor::SynthAudioProcessor()
+
 #ifndef JucePlugin_PreferredChannelConfigurations
      : AudioProcessor (BusesProperties()
                      #if ! JucePlugin_IsMidiEffect
@@ -95,6 +101,18 @@ void SynthAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
+    fase = 0.0;
+    fase2 = 0.0;
+    fase3 = 0.0;
+    fase4 = 0.0;
+    Amplificazione = 0.0;
+    Amplificazione2 = 0.0;
+    Amplificazione3 = 0.0;
+    Amplificazione4 = 0.0;
+    Frequenza = 440.0;
+    delta2 = 0.0;
+    delta3 = 0.0;
+    delta4 = 0.0;
 }
 
 void SynthAudioProcessor::releaseResources()
@@ -131,6 +149,7 @@ bool SynthAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) co
 
 void SynthAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
+    /*
     juce::ScopedNoDenormals noDenormals;
     auto totalNumInputChannels  = getTotalNumInputChannels();
     auto totalNumOutputChannels = getTotalNumOutputChannels();
@@ -155,7 +174,42 @@ void SynthAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
         auto* channelData = buffer.getWritePointer (channel);
 
         // ..do something to the data...
+
     }
+    */
+
+    float* channelDataL = buffer.getWritePointer(0);
+    float* channelDataR = buffer.getWritePointer(1);
+
+    float amplitude_now = Amplificazione;
+    float amplitude_now2 = Amplificazione2;
+    float amplitude_now3 = Amplificazione3;
+    float amplitude_now4 = Amplificazione4;
+    float freq_now = Frequenza;
+    int numSamples = buffer.getNumSamples();
+
+    for (int i = 0; i < numSamples; ++i) {
+        channelDataL[i] = amplitude_now * (float)sin((double)fase) + amplitude_now2* (float)sin((double)fase2) + amplitude_now3 * (float)sin((double)fase3) +amplitude_now4 * (float)sin((double)fase4);
+        channelDataR[i] = channelDataL[i];
+ 
+        fase += (float)(M_PI * 2. * (((double)freq_now / (double)
+            SAMPLE_RATE)));
+        if (fase > M_PI * 2.) fase -= M_PI * 2.;
+
+        fase2 += (float)(M_PI * 2. * (((double)(freq_now + delta2)/ (double)
+            SAMPLE_RATE)));
+        if (fase2 > M_PI * 2.) fase2 -= M_PI * 2.;
+
+        fase3 += (float)(M_PI * 2. * (((double)(freq_now + delta3) / (double)
+            SAMPLE_RATE)));
+        if (fase3 > M_PI * 2.) fase3 -= M_PI * 2.;
+
+        fase4 += (float)(M_PI * 2. * (((double)(freq_now + delta4) / (double)
+            SAMPLE_RATE)));
+        if (fase4 > M_PI * 2.) fase4 -= M_PI * 2.;
+
+    }
+
 }
 
 //==============================================================================

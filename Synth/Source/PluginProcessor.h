@@ -53,7 +53,24 @@ public:
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
+    //==============================================================================
+    float Amplificazione;
+    float Amplificazione2;
+    float Amplificazione3;
+    float Amplificazione4;
+    float Frequenza;
+    float delta2;
+    float delta3;
+    float delta4;
+
 private:
     //==============================================================================
+
+    float fase;
+    float fase2;
+    float fase3;
+    float fase4;
+    
+
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SynthAudioProcessor)
 };
