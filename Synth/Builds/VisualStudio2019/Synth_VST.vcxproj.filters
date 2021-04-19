@@ -16,13 +16,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="D:\Programmi\juce-6.0.8-windows\JUCE\modules\juce_audio_plugin_client\VST\juce_VST_Wrapper.cpp">
+    <ClCompile Include="D:\ProgrammiD\JUCE\modules\juce_audio_plugin_client\VST\juce_VST_Wrapper.cpp">
       <Filter>JUCE Modules\juce_audio_plugin_client\VST</Filter>
     </ClCompile>
-    <ClCompile Include="D:\Programmi\juce-6.0.8-windows\JUCE\modules\juce_audio_plugin_client\VST\juce_VST_Wrapper.mm">
+    <ClCompile Include="D:\ProgrammiD\JUCE\modules\juce_audio_plugin_client\VST\juce_VST_Wrapper.mm">
       <Filter>JUCE Modules\juce_audio_plugin_client\VST</Filter>
     </ClCompile>
-    <ClCompile Include="D:\Programmi\juce-6.0.8-windows\JUCE\modules\juce_audio_plugin_client\juce_audio_plugin_client_VST2.cpp">
+    <ClCompile Include="D:\ProgrammiD\JUCE\modules\juce_audio_plugin_client\juce_audio_plugin_client_VST2.cpp">
       <Filter>JUCE Modules\juce_audio_plugin_client</Filter>
     </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_audio_plugin_client_VST2.cpp">
@@ -30,7 +30,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="D:\Programmi\juce-6.0.8-windows\JUCE\modules\juce_audio_plugin_client\VST\juce_VSTCallbackHandler.h">
+    <ClInclude Include="D:\ProgrammiD\JUCE\modules\juce_audio_plugin_client\VST\juce_VSTCallbackHandler.h">
       <Filter>JUCE Modules\juce_audio_plugin_client\VST</Filter>
     </ClInclude>
   </ItemGroup>

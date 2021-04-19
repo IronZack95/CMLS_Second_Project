@@ -10,7 +10,7 @@
 #include "PluginEditor.h"
 
 //==============================================================================
-AdditiveSynthAudioProcessor::AdditiveSynthAudioProcessor()
+SynthAudioProcessor::SynthAudioProcessor()
 #ifndef JucePlugin_PreferredChannelConfigurations
      : AudioProcessor (BusesProperties()
                      #if ! JucePlugin_IsMidiEffect
@@ -24,17 +24,17 @@ AdditiveSynthAudioProcessor::AdditiveSynthAudioProcessor()
 {
 }
 
-AdditiveSynthAudioProcessor::~AdditiveSynthAudioProcessor()
+SynthAudioProcessor::~SynthAudioProcessor()
 {
 }
 
 //==============================================================================
-const juce::String AdditiveSynthAudioProcessor::getName() const
+const juce::String SynthAudioProcessor::getName() const
 {
     return JucePlugin_Name;
 }
 
-bool AdditiveSynthAudioProcessor::acceptsMidi() const
+bool SynthAudioProcessor::acceptsMidi() const
 {
    #if JucePlugin_WantsMidiInput
     return true;
@@ -43,7 +43,7 @@ bool AdditiveSynthAudioProcessor::acceptsMidi() const
    #endif
 }
 
-bool AdditiveSynthAudioProcessor::producesMidi() const
+bool SynthAudioProcessor::producesMidi() const
 {
    #if JucePlugin_ProducesMidiOutput
     return true;
@@ -52,7 +52,7 @@ bool AdditiveSynthAudioProcessor::producesMidi() const
    #endif
 }
 
-bool AdditiveSynthAudioProcessor::isMidiEffect() const
+bool SynthAudioProcessor::isMidiEffect() const
 {
    #if JucePlugin_IsMidiEffect
     return true;
@@ -61,50 +61,50 @@ bool AdditiveSynthAudioProcessor::isMidiEffect() const
    #endif
 }
 
-double AdditiveSynthAudioProcessor::getTailLengthSeconds() const
+double SynthAudioProcessor::getTailLengthSeconds() const
 {
     return 0.0;
 }
 
-int AdditiveSynthAudioProcessor::getNumPrograms()
+int SynthAudioProcessor::getNumPrograms()
 {
     return 1;   // NB: some hosts don't cope very well if you tell them there are 0 programs,
                 // so this should be at least 1, even if you're not really implementing programs.
 }
 
-int AdditiveSynthAudioProcessor::getCurrentProgram()
+int SynthAudioProcessor::getCurrentProgram()
 {
     return 0;
 }
 
-void AdditiveSynthAudioProcessor::setCurrentProgram (int index)
+void SynthAudioProcessor::setCurrentProgram (int index)
 {
 }
 
-const juce::String AdditiveSynthAudioProcessor::getProgramName (int index)
+const juce::String SynthAudioProcessor::getProgramName (int index)
 {
     return {};
 }
 
-void AdditiveSynthAudioProcessor::changeProgramName (int index, const juce::String& newName)
+void SynthAudioProcessor::changeProgramName (int index, const juce::String& newName)
 {
 }
 
 //==============================================================================
-void AdditiveSynthAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
+void SynthAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
 }
 
-void AdditiveSynthAudioProcessor::releaseResources()
+void SynthAudioProcessor::releaseResources()
 {
     // When playback stops, you can use this as an opportunity to free up any
     // spare memory, etc.
 }
 
 #ifndef JucePlugin_PreferredChannelConfigurations
-bool AdditiveSynthAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) const
+bool SynthAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) const
 {
   #if JucePlugin_IsMidiEffect
     juce::ignoreUnused (layouts);
@@ -129,7 +129,7 @@ bool AdditiveSynthAudioProcessor::isBusesLayoutSupported (const BusesLayout& lay
 }
 #endif
 
-void AdditiveSynthAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
+void SynthAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
     juce::ScopedNoDenormals noDenormals;
     auto totalNumInputChannels  = getTotalNumInputChannels();
@@ -159,25 +159,25 @@ void AdditiveSynthAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer
 }
 
 //==============================================================================
-bool AdditiveSynthAudioProcessor::hasEditor() const
+bool SynthAudioProcessor::hasEditor() const
 {
     return true; // (change this to false if you choose to not supply an editor)
 }
 
-juce::AudioProcessorEditor* AdditiveSynthAudioProcessor::createEditor()
+juce::AudioProcessorEditor* SynthAudioProcessor::createEditor()
 {
-    return new AdditiveSynthAudioProcessorEditor (*this);
+    return new SynthAudioProcessorEditor (*this);
 }
 
 //==============================================================================
-void AdditiveSynthAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
+void SynthAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
 {
     // You should use this method to store your parameters in the memory block.
     // You could do that either as raw data, or use the XML or ValueTree classes
     // as intermediaries to make it easy to save and load complex data.
 }
 
-void AdditiveSynthAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
+void SynthAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
@@ -187,5 +187,5 @@ void AdditiveSynthAudioProcessor::setStateInformation (const void* data, int siz
 // This creates new instances of the plugin..
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
-    return new AdditiveSynthAudioProcessor();
+    return new SynthAudioProcessor();
 }
