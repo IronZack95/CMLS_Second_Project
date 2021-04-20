@@ -1,0 +1,222 @@
+/*
+  ==============================================================================
+
+    This file contains the basic framework code for a JUCE plugin editor.
+
+  ==============================================================================
+*/
+
+#include "PluginProcessor.h"
+#include "PluginEditor.h"
+
+//==============================================================================
+SynthAudioProcessorEditor::SynthAudioProcessorEditor (SynthAudioProcessor& p)
+    : AudioProcessorEditor (&p), audioProcessor (p)
+{
+    // Make sure that before the constructor has finished, you've set the
+    // editor's size to whatever you need it to be.
+
+    setSize(700, 300);
+
+    Amp1.setSliderStyle(juce::Slider::RotaryVerticalDrag);
+    Amp1.setRange(0.0, 1.0, -0.702125);
+    Amp1.setTextBoxStyle(juce::Slider::NoTextBox, false, 90, 0);
+    Amp1.setPopupDisplayEnabled(true, false, this);
+    Amp1.setTextValueSuffix(" Amp 1");
+    Amp1.setValue(1.0);
+    /*LabelAmp1.attachToComponent(&Amp1, true);
+    LabelAmp1.setText("Main Gain", juce::dontSendNotification);
+    LabelAmp1.setColour(juce::Label::textColourId, juce::Colours::white);
+    LabelAmp1.setJustificationType(juce::Justification::horizontallyCentred);*/
+
+    Amp2.setSliderStyle(juce::Slider::RotaryVerticalDrag);
+    Amp2.setRange(0.0, 1.0, 0.001);
+    Amp2.setTextBoxStyle(juce::Slider::NoTextBox, false, 90, 0);
+    Amp2.setPopupDisplayEnabled(true, false, this);
+    Amp2.setTextValueSuffix(" Amp 2");
+    Amp2.setValue(1.0);
+
+    Amp3.setSliderStyle(juce::Slider::RotaryVerticalDrag);
+    Amp3.setRange(0.0, 1.0, 0.001);
+    Amp3.setTextBoxStyle(juce::Slider::NoTextBox, false, 90, 0);
+    Amp3.setPopupDisplayEnabled(true, false, this);
+    Amp3.setTextValueSuffix(" Amp 3");
+    Amp3.setValue(1.0);
+
+    Amp4.setSliderStyle(juce::Slider::RotaryVerticalDrag);
+    Amp4.setRange(0.0, 1.0, 0.001);
+    Amp4.setTextBoxStyle(juce::Slider::NoTextBox, false, 90, 0);
+    Amp4.setPopupDisplayEnabled(true, false, this);
+    Amp4.setTextValueSuffix(" Amp 4");
+    Amp4.setValue(1.0);
+
+    Delta2.setSliderStyle(juce::Slider::RotaryVerticalDrag);
+    Delta2.setRange(0.0, 1000.0, 1.0);
+    Delta2.setTextBoxStyle(juce::Slider::NoTextBox, false, 90, 0);
+    Delta2.setPopupDisplayEnabled(true, false, this);
+    Delta2.setTextValueSuffix(" Delta 2");
+    Delta2.setValue(1.0);
+
+    Delta3.setSliderStyle(juce::Slider::RotaryVerticalDrag);
+    Delta3.setRange(0.0, 1000.0, 1.0);
+    Delta3.setTextBoxStyle(juce::Slider::NoTextBox, false, 90, 0);
+    Delta3.setPopupDisplayEnabled(true, false, this);
+    Delta3.setTextValueSuffix(" Delta 3");
+    Delta3.setValue(1.0);
+
+    Delta4.setSliderStyle(juce::Slider::RotaryVerticalDrag);
+    Delta4.setRange(0.0, 1000.0, 1.0);
+    Delta4.setTextBoxStyle(juce::Slider::NoTextBox, false, 90, 0);
+    Delta4.setPopupDisplayEnabled(true, false, this);
+    Delta4.setTextValueSuffix(" Delta 4");
+    Delta4.setValue(1.0);
+
+
+    addAndMakeVisible(&Amp1);
+    addAndMakeVisible(&Amp2);
+    addAndMakeVisible(&Amp3);
+    addAndMakeVisible(&Amp4);
+
+    addAndMakeVisible(&Delta2);
+    addAndMakeVisible(&Delta3);
+    addAndMakeVisible(&Delta4);
+
+    addAndMakeVisible(&LabelAmp1);
+    
+    Amp1.addListener(this);
+    Amp2.addListener(this);
+    Amp3.addListener(this);
+    Amp4.addListener(this);
+    Delta2.addListener(this);
+    Delta3.addListener(this);
+    Delta4.addListener(this);
+
+    Amp1.setLookAndFeel(&otherLookAndFeel);
+    Amp2.setLookAndFeel(&otherLookAndFeel);
+    Amp3.setLookAndFeel(&otherLookAndFeel);
+    Amp4.setLookAndFeel(&otherLookAndFeel);
+
+    Delta2.setLookAndFeel(&otherLookAndFeel2);
+    Delta3.setLookAndFeel(&otherLookAndFeel2);
+    Delta4.setLookAndFeel(&otherLookAndFeel2);
+
+
+
+
+
+}
+
+SynthAudioProcessorEditor::~SynthAudioProcessorEditor()
+{
+}
+
+//==============================================================================
+void SynthAudioProcessorEditor::paint (juce::Graphics& g)
+{
+    // (Our component is opaque, so we must completely fill the background with a solid colour)
+    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
+
+    g.setColour (juce::Colours::white);
+    g.setFont (15.0f);
+    g.drawFittedText ("Group 16 Synth", getLocalBounds(), juce::Justification::topLeft, 1);
+    
+    //Sfondo
+    juce::Image background = juce::ImageCache::getFromMemory(BinaryData::wood_jpg, BinaryData::wood_jpgSize);
+    g.drawImageAt(background, 0, 0);
+    
+}
+
+void SynthAudioProcessorEditor::resized()
+{
+    // This is generally where you'll want to lay out the positions of any
+    // subcomponents in your editor..
+
+    int q = 20;
+
+    Amp1.setBounds(30 - q, 10, 80, getHeight() - 80);
+    Amp2.setBounds(210 - q, 10, 80, getHeight() - 80);
+    Amp3.setBounds(420 - q, 10, 80, getHeight() - 80);
+    Amp4.setBounds(600 - q, 10, 80, getHeight() - 80);
+
+    Delta2.setBounds(210 - q, 150, 80, getHeight() - 80);
+    Delta3.setBounds(420 - q, 150, 80, getHeight() - 80);
+    Delta4.setBounds(600 - q, 150, 80, getHeight() - 80);
+
+}
+
+// Creata da noi per attaccare lo Slider
+void SynthAudioProcessorEditor::sliderValueChanged(juce::Slider* slider) {
+    if (slider == &Amp1) {
+        audioProcessor.Amplificazione = Amp1.getValue();
+    }
+    else if (slider == &Amp2) {
+        audioProcessor.Amplificazione2 = Amp2.getValue();
+    }
+    else if (slider == &Amp3) {
+        audioProcessor.Amplificazione3 = Amp3.getValue();
+    }
+    else if (slider == &Amp4) {
+        audioProcessor.Amplificazione4 = Amp4.getValue();
+    }
+    else if (slider == &Delta2) {
+        audioProcessor.delta2 = Delta2.getValue();
+    }
+    else if (slider == &Delta3) {
+        audioProcessor.delta3 = Delta3.getValue();
+    }
+    else if (slider == &Delta4) {
+        audioProcessor.delta4 = Delta4.getValue();
+    }
+}
+
+void OtherLookAndFeel::drawRotarySlider(juce::Graphics& g, int x, int y, int width, int height, float sliderPos, float rotaryStartAngle, float rotaryEndAngle, juce::Slider& slider)
+{
+    float diameter = juce::jmin(width, height) * 0.9;
+    float radius = diameter / 2;
+    float centreX = x + width / 2;
+    float centreY = y + height / 2;
+    float rx = centreX - radius;
+    float ry = centreY - radius;
+    float angle = rotaryStartAngle + (sliderPos * (rotaryEndAngle - rotaryStartAngle));
+
+    juce::Rectangle<float> dialArea(rx, ry, diameter, diameter);
+
+    g.setColour(juce::Colours::chocolate);
+    g.fillEllipse(dialArea);
+
+    g.setColour(juce::Colours::black);
+
+    juce::Path dialThick;
+    dialThick.addRectangle(0, -radius, 2.0f, radius * 0.33);
+
+    g.fillPath(dialThick, juce::AffineTransform::rotation(angle).translated(centreX, centreY));
+
+    g.setColour(juce::Colours::black);
+    g.drawEllipse(rx, ry, diameter, diameter, 5.0f);
+}
+
+void OtherLookAndFeel2::drawRotarySlider(juce::Graphics& g, int x, int y, int width, int height, float sliderPos, float rotaryStartAngle, float rotaryEndAngle, juce::Slider& slider)
+{
+    float diameter = juce::jmin(width, height) * 0.7;
+    float radius = diameter / 2;
+    float centreX = x + width / 2;
+    float centreY = y + height / 2;
+    float rx = centreX - radius;
+    float ry = centreY - radius;
+    float angle = rotaryStartAngle + (sliderPos * (rotaryEndAngle - rotaryStartAngle));
+
+    juce::Rectangle<float> dialArea(rx, ry, diameter, diameter);
+
+    g.setColour(juce::Colours::chocolate);
+    g.fillEllipse(dialArea);
+
+    g.setColour(juce::Colours::black);
+
+    juce::Path dialThick;
+    dialThick.addRectangle(0, -radius, 2.0f, radius * 0.33);
+
+    g.fillPath(dialThick, juce::AffineTransform::rotation(angle).translated(centreX, centreY));
+
+    g.setColour(juce::Colours::black);
+    g.drawEllipse(rx, ry, diameter, diameter, 5.0f);
+}
