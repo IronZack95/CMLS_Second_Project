@@ -1,13 +1,3 @@
-/*
-  ==============================================================================
-
-    SynthVoice.h
-    Created: 27 Apr 2021 12:19:29am
-    Author:  Zack
-
-  ==============================================================================
-*/
-
 #pragma once
 #include <JuceHeader.h>
 #include "SynthSound.h"
@@ -22,12 +12,16 @@ public:
     void pitchWheelMoved(int newPitchWheelValue) override;
     void prepareToPlay(double sampleRate, int samplesPerBlock, int outputChannels);
     void renderNextBlock(juce::AudioBuffer<float> &outputBuffer, int startSample, int numSamples) override;
+    void updateADSR(const float attack, const float decay, const float sustain, const float release);           //serve per controllare l'ADSR
 
 private:
     // Classi per ADSR
     juce::ADSR adsr;
     juce::ADSR::Parameters adsrParams;
 
+    juce::AudioBuffer<float> synthBuffer;   //creo un nuovo buffer vuoto in modo tale da evitare i "click" generati assieme alle note.
+                                            //Questi sono dovuti al fatto che la fase della sinusoide non è perfettamente a zero quando premo la nota.
+                                            // 
     // Classi per l'oscillatore
     juce::dsp::Oscillator<float> osc { [] (float x) {return std::sin(x); }};
     juce::dsp::Gain<float> gain;

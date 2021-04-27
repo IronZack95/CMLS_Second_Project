@@ -1,13 +1,3 @@
-/*
-  ==============================================================================
-
-    SynthVoice.cpp
-    Created: 27 Apr 2021 12:19:29am
-    Author:  Zack
-
-  ==============================================================================
-*/
-
 #include "SynthVoice.h"
 
 bool SynthVoice::canPlaySound(juce::SynthesiserSound* sound)
@@ -22,6 +12,11 @@ void SynthVoice::startNote(int midiNoteNumber, float velocity, juce::Synthesiser
 void SynthVoice::stopNote(float velocity, bool allowTailOff)
 {
     adsr.noteOff(); //qui è dove finisce l'envelope dell'ADSR
+
+    if (!allowTailOff || !adsr.isActive())
+    {
+        clearCurrentNote();
+    }
 }
 void SynthVoice::controllerMoved(int controllerNumber, int newControllerValue)
 {
@@ -44,21 +39,52 @@ void SynthVoice::prepareToPlay(double sampleRate, int samplesPerBlock, int outpu
     osc.prepare(spec);
     gain.prepare(spec);
 
-    osc.setFrequency(220.0f);
-    gain.setGainLinear(0.01f);
+    //osc.setFrequency(220.0f);
+    gain.setGainLinear(0.3f);
 
     isPrepared = true; // ok siamo pronti a partire
 }
+
+void SynthVoice::updateADSR(const float attack, const float decay, const float sustain, const float release)
+{
+    adsrParams.attack = attack;
+    adsrParams.decay = decay;
+    adsrParams.sustain = sustain;
+    adsrParams.release = release;
+
+    adsr.setParameters(adsrParams);   
+}
+
 
 void SynthVoice::renderNextBlock(juce::AudioBuffer<float> &outputBuffer, int startSample, int numSamples)
 {
     jassert(isPrepared); //serve a stabilire che se la variabile non è stata eseguita il progetto si ferma
 
+    if (! isVoiceActive())  // se la voice selezionata non è attiva skippo
+    {
+        return;
+    }
 
-    juce::dsp::AudioBlock<float> audioBlock{ outputBuffer };            //Renderizzo il prossimo audio Block
+    synthBuffer.setSize(outputBuffer.getNumChannels(), numSamples, false, false, true); //Aggiorno il Synthbuffer che è un buffer di sostegno
+    synthBuffer.clear();
+
+    juce::dsp::AudioBlock<float> audioBlock{ synthBuffer };            //Renderizzo il prossimo audio Block  
     osc.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
     gain.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
 
-    adsr.applyEnvelopeToBuffer(outputBuffer, startSample, numSamples); // dopo che ho caricatro il buffer di uscita con l'output desiderato applico l'ADSR
+    adsr.applyEnvelopeToBuffer(synthBuffer, 0, synthBuffer.getNumSamples()); // dopo che ho caricatro il buffer di uscita con l'output desiderato applico l'ADSR
+    /*
+    if (startSample != 0)
+        jassertfalse;
+    */
 
+    for (int channel = 0; channel < outputBuffer.getNumChannels(); ++channel)      //carico le informazioni di synthBuffer sull'outputBuffer
+    {
+        outputBuffer.addFrom(channel, startSample, synthBuffer, channel, 0, numSamples);
+
+        if (!adsr.isActive())
+        {
+            clearCurrentNote();
+        }
+    }
 }
