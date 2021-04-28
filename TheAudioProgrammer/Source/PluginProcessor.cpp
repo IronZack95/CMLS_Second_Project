@@ -14,8 +14,13 @@ SynthAudioProcessor::SynthAudioProcessor()
                        ), apvts(*this, nullptr, "Parameters", createParameters()) // qui devo inizializzare l'oggetto tree state
 #endif
 {
-    synth.addSound(new SynthSound());   
-    synth.addVoice(new SynthVoice());   //Creo una voce
+    for (auto i = 0; i < 4; ++i)
+    {
+        synth.addVoice(new SynthVoice());   //Creo una voce
+
+        synth.addSound(new SynthSound());
+    }   
+    
 }
 
 SynthAudioProcessor::~SynthAudioProcessor()
@@ -143,10 +148,10 @@ void SynthAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
     {
         if (auto voice = dynamic_cast<SynthVoice*>(synth.getVoice(i)))
         {
-            // OSC controls
-            // ADSR
+            // OSC controls            
             // LFO
 
+            // ADSR
             auto& attack = *apvts.getRawParameterValue("ATTACK");       //riferimenti alla classe ValueTreeState
             auto& decay = *apvts.getRawParameterValue("DECAY");
             auto& sustain = *apvts.getRawParameterValue("SUSTAIN");
@@ -155,11 +160,7 @@ void SynthAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
             voice->updateADSR(attack.load(), decay.load(), sustain.load(), release.load());   //i metodi load servono perchè le variabili non sono semplici float ma atomic
         }
     }
-    /*
-    for (const juce::MidiMessageMetadata metadata : midiMessages)
-        if (metadata.numBytes == 3)
-            juce::Logger::writeToLog("Timestamp: " + juce::String (metadata.getMessage().getTimeStamp()));
-    */
+    
     synth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());  // questo chiama il "renderNextBlock"
 }
 
@@ -212,13 +213,13 @@ juce::AudioProcessorValueTreeState::ParameterLayout SynthAudioProcessor::createP
     params.push_back(std::make_unique<juce::AudioParameterChoice>("OSC", "Oscillator", juce::StringArray{ "Sine","Saw","Square"},0));
 
     // ADSR
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("ATTACK", "Attack", juce::NormalisableRange<float>{0.1f, 10.0f, }, 0.1f)); // l'ultimo parametro è il default
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("ATTACK", "Attack", juce::NormalisableRange<float>{0.1f, 3.0f, }, 0.1f)); // l'ultimo parametro è il default
    
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("DECAY", "Decay", juce::NormalisableRange<float>{0.1f, 10.0f, }, 0.1f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("DECAY", "Decay", juce::NormalisableRange<float>{0.1f, 3.0f, }, 0.1f));
     
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("SUSTAIN", "Sustain", juce::NormalisableRange<float>{0.1f, 10.0f, }, 1.0f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("SUSTAIN", "Sustain", juce::NormalisableRange<float>{0.1f, 3.0f, }, 1.0f));
     
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("RELEASE", "Release", juce::NormalisableRange<float>{0.1f, 10.0f, }, 0.4f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("RELEASE", "Release", juce::NormalisableRange<float>{0.1f, 3.0f, }, 0.4f));
 
 
     return {params.begin(), params.end() }; // ritorno con il vettore di paramentri

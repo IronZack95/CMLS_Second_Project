@@ -38,9 +38,13 @@ void SynthVoice::prepareToPlay(double sampleRate, int samplesPerBlock, int outpu
 
     osc.prepare(spec);
     gain.prepare(spec);
-
     //osc.setFrequency(220.0f);
-    gain.setGainLinear(0.3f);
+    gain.setGainLinear(0.3f);  
+
+    delta2 = 250.0f;
+    osc2.prepare(spec);
+    gain2.prepare(spec);    
+    gain2.setGainLinear(0.3f);
 
     isPrepared = true; // ok siamo pronti a partire
 }
@@ -72,11 +76,11 @@ void SynthVoice::renderNextBlock(juce::AudioBuffer<float> &outputBuffer, int sta
     osc.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
     gain.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
 
+    osc2.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
+    gain2.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
+    osc2.setFrequency(osc.getFrequency() + delta2);
+
     adsr.applyEnvelopeToBuffer(synthBuffer, 0, synthBuffer.getNumSamples()); // dopo che ho caricatro il buffer di uscita con l'output desiderato applico l'ADSR
-    /*
-    if (startSample != 0)
-        jassertfalse;
-    */
 
     for (int channel = 0; channel < outputBuffer.getNumChannels(); ++channel)      //carico le informazioni di synthBuffer sull'outputBuffer
     {
