@@ -50,16 +50,14 @@ public:
 
     juce::AudioProcessorValueTreeState apvts; // creo l'oggetto tree state
 
-    /*
-    float delta2;
-    float delta3;
-    float delta4;
-    */
-
 private:    
 
-    juce::Synthesiser synth; //creao l'oggetto Synth
-    juce::Synthesiser synth2;
+    
+    juce::Synthesiser synth;    // MAIN SYNTH
+
+    juce::Synthesiser synth2;   // SYNTH ADDITIVI
+    juce::Synthesiser synth3;
+    juce::Synthesiser synth4;
 
     juce::AudioProcessorValueTreeState::ParameterLayout createParameters();
 

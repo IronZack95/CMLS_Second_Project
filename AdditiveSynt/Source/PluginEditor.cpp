@@ -4,13 +4,13 @@
 
 //==============================================================================
 SynthAudioProcessorEditor::SynthAudioProcessorEditor(SynthAudioProcessor& p)
-    : AudioProcessorEditor(&p), audioProcessor(p), osc (audioProcessor.apvts, "OSC1WAVETYPE"), adsr (audioProcessor.apvts), addOsc (audioProcessor.apvts) //inizializzatore
+    : AudioProcessorEditor(&p), audioProcessor(p), oscSel (audioProcessor.apvts, "OSC1WAVETYPE"), adsr (audioProcessor.apvts), addOsc (audioProcessor.apvts) //inizializzatore
 {
 
     setSize(400, 300);
 
     //Menu' oscillatore
-    addAndMakeVisible(osc);
+    addAndMakeVisible(oscSel);
 
     // ADSR
     //oscSelAttachment = std::make_unique< juce::AudioProcessorValueTreeState::ComboBoxAttachment>(audioProcessor.apvts, "OSC", oscSelector);
@@ -31,7 +31,7 @@ void SynthAudioProcessorEditor::paint (juce::Graphics& g)
     // (Our component is opaque, so we must completely fill the background with a solid colour)
     //g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
 
-    g.fillAll (juce::Colours::white);
+    g.fillAll(juce::Colours::white);
     //g.setFont (15.0f);
     //g.drawFittedText ("Ciao, sono un cucciolo di synth", getLocalBounds(), juce::Justification::topLeft, 1);
 }
@@ -45,7 +45,7 @@ void SynthAudioProcessorEditor::resized()
     const auto sliderStartX = 0;
     const auto sliderStartY = bounds.getHeight() / 2 - (sliderHeight / 2);
     // OSC Menu'
-    osc.setBounds(10, 10, 100, 30);
+    oscSel.setBounds(0, 0, getWidth() / 2, 50);
     // ADSR Resized
     adsr.setBounds(getWidth() / 2, 0, getWidth() / 2, getHeight());
     // Addittive Osc

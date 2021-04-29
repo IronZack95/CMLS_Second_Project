@@ -32,11 +32,21 @@ private:
     juce::Slider freq3Slider;
     juce::Slider freq4Slider;
 
+    juce::Slider Gain1;
+    juce::Slider Gain2;
+    juce::Slider Gain3;
+    juce::Slider Gain4;
+
     using SliderAttachment = juce::AudioProcessorValueTreeState::SliderAttachment; 
 
     std::unique_ptr<SliderAttachment> freq2Attachment;
     std::unique_ptr<SliderAttachment> freq3Attachment;
     std::unique_ptr<SliderAttachment> freq4Attachment;
+
+    std::unique_ptr<SliderAttachment> Gain1Attachment;
+    std::unique_ptr<SliderAttachment> Gain2Attachment;
+    std::unique_ptr<SliderAttachment> Gain3Attachment;
+    std::unique_ptr<SliderAttachment> Gain4Attachment;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AddittiveComponent)
 };

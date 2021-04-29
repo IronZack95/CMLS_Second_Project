@@ -26,7 +26,7 @@ private:
 
     // 
     SynthAudioProcessor& audioProcessor;
-    OscComponent osc;                       // rendo visibile il componente oscillatore
+    OscComponent oscSel;                       // rendo visibile il componente oscillatore
     AdsrComponent adsr;                     // rendo visibile l'ADSR
     AddittiveComponent addOsc;              // rendo visibili i controlli degli oscillatori additivi
 

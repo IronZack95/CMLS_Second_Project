@@ -2,7 +2,7 @@
 
 <JUCERPROJECT id="y4eCa0" name="Synth" projectType="audioplug" useAppConfig="0"
               addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1"
-              pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn"
+              pluginCharacteristicsValue="pluginIsMidiEffectPlugin,pluginIsSynth,pluginProducesMidiOut,pluginWantsMidiIn"
               pluginFormats="buildStandalone">
   <MAINGROUP id="sOTIOZ" name="Synth">
     <GROUP id="{E14D2188-C3F8-6576-45D7-2B93B9D498C9}" name="Source">
@@ -16,6 +16,24 @@
       <FILE id="LZbbZJ" name="PluginEditor.cpp" compile="1" resource="0"
             file="Source/PluginEditor.cpp"/>
       <FILE id="okNzUF" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+      <GROUP id="{2FF63A0F-6F9C-D67D-D61D-6CA2F2054C62}" name="Data">
+        <FILE id="iJe4Cd" name="AdsrData.cpp" compile="1" resource="0" file="Source/Data/AdsrData.cpp"/>
+        <FILE id="f01nyA" name="AdsrData.h" compile="0" resource="0" file="Source/Data/AdsrData.h"/>
+        <FILE id="slBVii" name="OscData.cpp" compile="1" resource="0" file="Source/Data/OscData.cpp"/>
+        <FILE id="EcTazi" name="OscData.h" compile="0" resource="0" file="Source/Data/OscData.h"/>
+      </GROUP>
+      <GROUP id="{78EFF068-CF1A-753A-1D1C-F83C798E8C2F}" name="UI">
+        <FILE id="qVGKDp" name="AddittiveComponent.cpp" compile="1" resource="0"
+              file="Source/UI/AddittiveComponent.cpp"/>
+        <FILE id="zNhgYv" name="AddittiveComponent.h" compile="0" resource="0"
+              file="Source/UI/AddittiveComponent.h"/>
+        <FILE id="vOHAhV" name="AdsrComponent.cpp" compile="1" resource="0"
+              file="Source/UI/AdsrComponent.cpp"/>
+        <FILE id="dR9oBh" name="AdsrComponent.h" compile="0" resource="0" file="Source/UI/AdsrComponent.h"/>
+        <FILE id="y3VXys" name="OscComponent.cpp" compile="1" resource="0"
+              file="Source/UI/OscComponent.cpp"/>
+        <FILE id="JH191z" name="OscComponent.h" compile="0" resource="0" file="Source/UI/OscComponent.h"/>
+      </GROUP>
     </GROUP>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>
@@ -38,7 +56,8 @@
         <MODULEPATH id="juce_graphics" path="../../../ProgrammiD/JUCE/modules"/>
         <MODULEPATH id="juce_gui_basics" path="../../../ProgrammiD/JUCE/modules"/>
         <MODULEPATH id="juce_gui_extra" path="../../../ProgrammiD/JUCE/modules"/>
-        <MODULEPATH id="juce_dsp" path="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE"/>
+        <MODULEPATH id="juce_dsp" path="../../../ProgrammiD/JUCE/modules"/>
+        <MODULEPATH id="juce_osc" path="../../../ProgrammiD/JUCE/modules"/>
       </MODULEPATHS>
     </VS2019>
   </EXPORTFORMATS>
@@ -52,11 +71,12 @@
     <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
-    <MODULE id="juce_dsp" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_dsp" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_osc" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
   </MODULES>
   <LIVE_SETTINGS>
     <WINDOWS/>

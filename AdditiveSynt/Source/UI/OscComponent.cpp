@@ -32,5 +32,13 @@ void OscComponent::paint (juce::Graphics& g)
 
 void OscComponent::resized()
 {
-    oscWaveSelector.setBounds(0, 0, 90, 20);
+    const auto bounds = getLocalBounds().reduced(10);
+    const auto Width = bounds.getWidth();
+    const auto Height = bounds.getWidth();
+    const auto BoxWidth = 100;
+    const auto BoxHeight = 20;
+    const auto BoxStartX = 10;
+    const auto BoxStartY = 10;
+
+    oscWaveSelector.setBounds(10, 10, BoxWidth, BoxHeight);
 }

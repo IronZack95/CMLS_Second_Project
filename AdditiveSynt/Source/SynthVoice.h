@@ -18,47 +18,20 @@ public:
     void renderNextBlock(juce::AudioBuffer<float> &outputBuffer, int startSample, int numSamples) override;
 
     void update(const float attack, const float decay, const float sustain, const float release);           //serve per fare l'update di tutti i parametri
+    void updateDelta(const float delta);
+    void updateGain(const float gain);
     
-    OscData& getOscillator() { return osc; }        // questo serve a comunicare con la funzione OscData che contiene tutti i parametri degli oscillatori
+    OscData& getOscillator() { return oscillatore; }        // questo serve a comunicare con la funzione OscData che contiene tutti i parametri degli oscillatori
 
-
-    float delta2;
-    float delta3;
-    float delta4;
+    float delta_freq;
 
 private:
 
-    // Classi per ADSR
-    AdsrData adsr;
+    AdsrData adsr;                          // Creo oggetto ADSR
     juce::AudioBuffer<float> synthBuffer;   //creo un nuovo buffer vuoto in modo tale da evitare i "click" generati assieme alle note.
                      
-    // Creo classe che gestisce l'oscillatore principale
-    OscData osc;
-    juce::dsp::Gain<float> gain;
-
-    /*
-    // Oscillatori additivi
-    OscData osc2;
-    juce::dsp::Gain<float> gain2;
-    OscData osc3;
-    juce::dsp::Gain<float> gain3;
-    OscData osc4;
-    juce::dsp::Gain<float> gain4;
-    */
+    OscData oscillatore;                    // Creo oggetto OSCILLATORE --> contiene dati sia della Frequenza che di Gain
 
     bool isPrepared = false;    //serve a stabilire che il synt è pronto a funzionare
 
-    /*
-    //secondo oscillatore
-    juce::dsp::Oscillator<float> osc2{ [](float x) {return std::sin(x); } };
-    juce::dsp::Gain<float> gain2;
-
-    //terzo oscillatore
-    juce::dsp::Oscillator<float> osc3{ [](float x) {return std::sin(x); } };
-    juce::dsp::Gain<float> gain3;
-
-    //quarto oscillatore
-    juce::dsp::Oscillator<float> osc4{ [](float x) {return std::sin(x); } };
-    juce::dsp::Gain<float> gain4;
-    */
 };
