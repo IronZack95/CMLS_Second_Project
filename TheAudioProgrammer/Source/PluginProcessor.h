@@ -6,6 +6,7 @@
 
 //==============================================================================
 /**
+*       QUESTO è IL CERCELLO PRINCIPALE DEL PLUGIN
 */
 class SynthAudioProcessor  : public juce::AudioProcessor
 {
@@ -47,12 +48,23 @@ public:
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
-    juce::AudioProcessorValueTreeState apvts; // creo l'oggetto treestate
+    juce::AudioProcessorValueTreeState apvts; // creo l'oggetto tree state
 
-private:
+    /*
+    float delta2;
+    float delta3;
+    float delta4;
+    */
+
+private:    
+
     juce::Synthesiser synth; //creao l'oggetto Synth
+    juce::Synthesiser synth2;
+
     juce::AudioProcessorValueTreeState::ParameterLayout createParameters();
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SynthAudioProcessor)
 };
+
+

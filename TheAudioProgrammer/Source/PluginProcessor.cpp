@@ -19,6 +19,8 @@ SynthAudioProcessor::SynthAudioProcessor()
         synth.addVoice(new SynthVoice());   //Creo una voce
 
         synth.addSound(new SynthSound());
+
+
     }   
     
 }
@@ -146,9 +148,9 @@ void SynthAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
 
     for (int i = 0; i < synth.getNumVoices(); ++i)
     {
-        if (auto voice = dynamic_cast<SynthVoice*>(synth.getVoice(i)))
+        if (auto voice = dynamic_cast<SynthVoice*>(synth.getVoice(i)))          // Qui dentro metto i parametri che vanno aggiornati costantemente
         {
-            // OSC controls            
+                      
             // LFO
 
             // ADSR
@@ -157,7 +159,16 @@ void SynthAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
             auto& sustain = *apvts.getRawParameterValue("SUSTAIN");
             auto& release = *apvts.getRawParameterValue("RELEASE");
 
-            voice->updateADSR(attack.load(), decay.load(), sustain.load(), release.load());   //i metodi load servono perchè le variabili non sono semplici float ma atomic
+            // OSC controls  
+            auto& oscWaveChoice = *apvts.getRawParameterValue("OSC1WAVETYPE");
+
+            //ADD OSC
+            auto& freq2 = *apvts.getRawParameterValue("FREQ2");
+            auto& freq3 = *apvts.getRawParameterValue("FREQ3");
+            auto& freq4 = *apvts.getRawParameterValue("FREQ4");
+
+            voice->update(attack.load(), decay.load(), sustain.load(), release.load());   //i metodi load servono perchè le variabili non sono semplici float ma atomic
+            voice->getOscillator().setWaveType(oscWaveChoice);
         }
     }
     
@@ -209,9 +220,6 @@ juce::AudioProcessorValueTreeState::ParameterLayout SynthAudioProcessor::createP
 
     std::vector<std::unique_ptr<juce::RangedAudioParameter>> params; //riempio questo vettore con i paramentri dei valori
 
-    // OSC Select
-    params.push_back(std::make_unique<juce::AudioParameterChoice>("OSC", "Oscillator", juce::StringArray{ "Sine","Saw","Square"},0));
-
     // ADSR
     params.push_back(std::make_unique<juce::AudioParameterFloat>("ATTACK", "Attack", juce::NormalisableRange<float>{0.1f, 3.0f, }, 0.1f)); // l'ultimo parametro è il default
    
@@ -221,6 +229,16 @@ juce::AudioProcessorValueTreeState::ParameterLayout SynthAudioProcessor::createP
     
     params.push_back(std::make_unique<juce::AudioParameterFloat>("RELEASE", "Release", juce::NormalisableRange<float>{0.1f, 3.0f, }, 0.4f));
 
+    // OSC Select
+
+    params.push_back(std::make_unique<juce::AudioParameterChoice>("OSC1WAVETYPE", "Osc 1 Wave Type", juce::StringArray{ "Sine","Saw","Square" }, 0));
+
+    // OSC 
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("FREQ2", "Freq 2", juce::NormalisableRange<float>{0.1f, 3.0f, }, 0.1f));
+
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("FREQ3", "Freq 3", juce::NormalisableRange<float>{0.1f, 3.0f, }, 1.0f));
+
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("FREQ4", "Freq 4", juce::NormalisableRange<float>{0.1f, 3.0f, }, 0.4f));
 
     return {params.begin(), params.end() }; // ritorno con il vettore di paramentri
 }

@@ -2,11 +2,15 @@
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
+#include "SynthVoice.h"
+#include "UI/AdsrComponent.h"
+#include "UI/OscComponent.h"
+#include "UI/AddittiveComponent.h"
 
 //==============================================================================
 /**
 */
-class SynthAudioProcessorEditor  : public juce::AudioProcessorEditor
+class SynthAudioProcessorEditor  : public juce::AudioProcessorEditor, public juce::Slider::Listener
 {
 public:
     SynthAudioProcessorEditor (SynthAudioProcessor&);
@@ -15,28 +19,16 @@ public:
     //==============================================================================
     void paint (juce::Graphics&) override;
     void resized() override;
+    void sliderValueChanged(juce::Slider* slider) override;
 
-private:
     
-    void setSliderParams(juce::Slider& slider);
+private:  
 
-    juce::Slider attackSlider;
-    juce::Slider decaySlider;
-    juce::Slider sustainSlider;
-    juce::Slider releaseSlider;
-    juce::ComboBox oscSelector;
-    
-    // vado ad attaccare i valori dei parametri agli stlider nella UI
-
-    using SliderAttachment = juce::AudioProcessorValueTreeState::SliderAttachment;
-
-    std::unique_ptr<SliderAttachment> attackAttachment;
-    std::unique_ptr<SliderAttachment> decayAttachment;
-    std::unique_ptr<SliderAttachment> sustainAttachment;
-    std::unique_ptr<SliderAttachment> releaseAttachment;
-    std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> oscSelAttachment;
-
+    // 
     SynthAudioProcessor& audioProcessor;
+    OscComponent osc;                       // rendo visibile il componente oscillatore
+    AdsrComponent adsr;                     // rendo visibile l'ADSR
+    AddittiveComponent addOsc;              // rendo visibili i controlli degli oscillatori additivi
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SynthAudioProcessorEditor)
 };
