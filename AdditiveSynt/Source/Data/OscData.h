@@ -11,7 +11,7 @@
 #pragma once
 #include<JuceHeader.h>
 
-// Questa classe è figlia sia di Oscillatr DSP che di Gain DSP così posso controllare in maniera unica i driver dei miei oscillatori
+// Questa classe Ã¨ figlia sia di Oscillatr DSP che di Gain DSP cosÃ¬ posso controllare in maniera unica i driver dei miei oscillatori
 
 class OscData : public juce::dsp::Oscillator<float>, public juce::dsp::Gain<float>
 {

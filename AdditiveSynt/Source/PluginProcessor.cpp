@@ -22,14 +22,14 @@ SynthAudioProcessor::SynthAudioProcessor()
         synth2.addVoice(new SynthVoice());   // SYNTH ADDITIVI
         synth2.addSound(new SynthSound());
 
-        synth3.addVoice(new SynthVoice());   
+        synth3.addVoice(new SynthVoice());
         synth3.addSound(new SynthSound());
 
-        synth4.addVoice(new SynthVoice());  
+        synth4.addVoice(new SynthVoice());
         synth4.addSound(new SynthSound());
 
-    }   
-    
+    }
+
 }
 
 SynthAudioProcessor::~SynthAudioProcessor()
@@ -101,9 +101,9 @@ void SynthAudioProcessor::changeProgramName (int index, const juce::String& newN
 //==============================================================================
 void SynthAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    synth.setCurrentPlaybackSampleRate(sampleRate);                                             // MAIN SYNTH   
-        
-    for (int i = 0; i < synth.getNumVoices(); i++)          
+    synth.setCurrentPlaybackSampleRate(sampleRate);                                             // MAIN SYNTH
+
+    for (int i = 0; i < synth.getNumVoices(); i++)
     {
         if (auto voice = dynamic_cast<SynthVoice*>(synth.getVoice(i)))                          // Se sono riuscito a puntare la synth voice giusta allora..
         {
@@ -115,9 +115,9 @@ void SynthAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 
     for (int i = 0; i < synth2.getNumVoices(); i++)
     {
-        if (auto voice = dynamic_cast<SynthVoice*>(synth2.getVoice(i))) 
+        if (auto voice = dynamic_cast<SynthVoice*>(synth2.getVoice(i)))
         {
-            voice->prepareToPlay(sampleRate, samplesPerBlock, getTotalNumOutputChannels());    
+            voice->prepareToPlay(sampleRate, samplesPerBlock, getTotalNumOutputChannels());
         }
     }
 
@@ -125,9 +125,9 @@ void SynthAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 
     for (int i = 0; i < synth3.getNumVoices(); i++)
     {
-        if (auto voice = dynamic_cast<SynthVoice*>(synth3.getVoice(i))) 
+        if (auto voice = dynamic_cast<SynthVoice*>(synth3.getVoice(i)))
         {
-            voice->prepareToPlay(sampleRate, samplesPerBlock, getTotalNumOutputChannels()); 
+            voice->prepareToPlay(sampleRate, samplesPerBlock, getTotalNumOutputChannels());
         }
     }
 
@@ -135,7 +135,7 @@ void SynthAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 
     for (int i = 0; i < synth4.getNumVoices(); i++)
     {
-        if (auto voice = dynamic_cast<SynthVoice*>(synth4.getVoice(i))) 
+        if (auto voice = dynamic_cast<SynthVoice*>(synth4.getVoice(i)))
         {
             voice->prepareToPlay(sampleRate, samplesPerBlock, getTotalNumOutputChannels());
         }
@@ -187,7 +187,7 @@ void SynthAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
     {
         if (auto voice = dynamic_cast<SynthVoice*>(synth.getVoice(i)))                  // Qui dentro metto i parametri che vanno aggiornati costantemente
         {
-                      
+
             // LFO
 
             // ADSR
@@ -196,7 +196,7 @@ void SynthAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
             auto& sustain = *apvts.getRawParameterValue("SUSTAIN");
             auto& release = *apvts.getRawParameterValue("RELEASE");
 
-            // OSC controls  
+            // OSC controls
             auto& oscWaveChoice = *apvts.getRawParameterValue("OSC1WAVETYPE");
 
             //ADD OSC
@@ -207,42 +207,13 @@ void SynthAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
             voice->updateGain(gain.load());
         }
     }
-    
+
     synth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());               // questo chiama il "renderNextBlock"
 
 
     for (int i = 0; i < synth2.getNumVoices(); ++i)
     {
-        if (auto voice = dynamic_cast<SynthVoice*>(synth2.getVoice(i)))       
-        {
-
-            // LFO
-
-            // ADSR
-            auto& attack = *apvts.getRawParameterValue("ATTACK");    
-            auto& decay = *apvts.getRawParameterValue("DECAY");
-            auto& sustain = *apvts.getRawParameterValue("SUSTAIN");
-            auto& release = *apvts.getRawParameterValue("RELEASE");
-
-            // OSC controls  
-            auto& oscWaveChoice = *apvts.getRawParameterValue("OSC1WAVETYPE");
-
-            //ADD OSC
-            auto& gain = *apvts.getRawParameterValue("GAIN2");
-            auto& delta = *apvts.getRawParameterValue("FREQ2");
-
-            voice->update(attack.load(), decay.load(), sustain.load(), release.load());  
-            voice->getOscillator().setWaveType(oscWaveChoice);
-            voice->updateDelta(delta.load());
-            voice->updateGain(gain.load());
-        }
-    }
-
-    synth2.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples()); 
-
-    for (int i = 0; i < synth3.getNumVoices(); ++i)
-    {
-        if (auto voice = dynamic_cast<SynthVoice*>(synth3.getVoice(i)))      
+        if (auto voice = dynamic_cast<SynthVoice*>(synth2.getVoice(i)))
         {
 
             // LFO
@@ -253,43 +224,72 @@ void SynthAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
             auto& sustain = *apvts.getRawParameterValue("SUSTAIN");
             auto& release = *apvts.getRawParameterValue("RELEASE");
 
-            // OSC controls  
+            // OSC controls
             auto& oscWaveChoice = *apvts.getRawParameterValue("OSC1WAVETYPE");
 
             //ADD OSC
-            auto& gain = *apvts.getRawParameterValue("GAIN3");
-            auto& delta = *apvts.getRawParameterValue("FREQ3");
+            auto& gain = *apvts.getRawParameterValue("GAIN2");
+            auto& delta = *apvts.getRawParameterValue("FREQ2");
 
-            voice->update(attack.load(), decay.load(), sustain.load(), release.load()); 
+            voice->update(attack.load(), decay.load(), sustain.load(), release.load());
             voice->getOscillator().setWaveType(oscWaveChoice);
             voice->updateDelta(delta.load());
             voice->updateGain(gain.load());
         }
     }
 
-    synth3.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples()); 
+    synth2.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
 
-    for (int i = 0; i < synth4.getNumVoices(); ++i)
+    for (int i = 0; i < synth3.getNumVoices(); ++i)
     {
-        if (auto voice = dynamic_cast<SynthVoice*>(synth4.getVoice(i))) 
+        if (auto voice = dynamic_cast<SynthVoice*>(synth3.getVoice(i)))
         {
 
             // LFO
 
             // ADSR
-            auto& attack = *apvts.getRawParameterValue("ATTACK");   
+            auto& attack = *apvts.getRawParameterValue("ATTACK");
             auto& decay = *apvts.getRawParameterValue("DECAY");
             auto& sustain = *apvts.getRawParameterValue("SUSTAIN");
             auto& release = *apvts.getRawParameterValue("RELEASE");
 
-            // OSC controls  
+            // OSC controls
+            auto& oscWaveChoice = *apvts.getRawParameterValue("OSC1WAVETYPE");
+
+            //ADD OSC
+            auto& gain = *apvts.getRawParameterValue("GAIN3");
+            auto& delta = *apvts.getRawParameterValue("FREQ3");
+
+            voice->update(attack.load(), decay.load(), sustain.load(), release.load());
+            voice->getOscillator().setWaveType(oscWaveChoice);
+            voice->updateDelta(delta.load());
+            voice->updateGain(gain.load());
+        }
+    }
+
+    synth3.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
+
+    for (int i = 0; i < synth4.getNumVoices(); ++i)
+    {
+        if (auto voice = dynamic_cast<SynthVoice*>(synth4.getVoice(i)))
+        {
+
+            // LFO
+
+            // ADSR
+            auto& attack = *apvts.getRawParameterValue("ATTACK");
+            auto& decay = *apvts.getRawParameterValue("DECAY");
+            auto& sustain = *apvts.getRawParameterValue("SUSTAIN");
+            auto& release = *apvts.getRawParameterValue("RELEASE");
+
+            // OSC controls
             auto& oscWaveChoice = *apvts.getRawParameterValue("OSC1WAVETYPE");
 
             //ADD OSC
             auto& gain = *apvts.getRawParameterValue("GAIN4");
             auto& delta = *apvts.getRawParameterValue("FREQ4");
 
-            voice->update(attack.load(), decay.load(), sustain.load(), release.load()); 
+            voice->update(attack.load(), decay.load(), sustain.load(), release.load());
             voice->getOscillator().setWaveType(oscWaveChoice);
             voice->updateDelta(delta.load());
             voice->updateGain(gain.load());
@@ -346,18 +346,18 @@ juce::AudioProcessorValueTreeState::ParameterLayout SynthAudioProcessor::createP
 
     // ADSR
     params.push_back(std::make_unique<juce::AudioParameterFloat>("ATTACK", "Attack", juce::NormalisableRange<float>{0.1f, 3.0f, }, 0.207f)); // l'ultimo parametro è il default
-   
+
     params.push_back(std::make_unique<juce::AudioParameterFloat>("DECAY", "Decay", juce::NormalisableRange<float>{0.1f, 3.0f, }, 0.351f));
-    
+
     params.push_back(std::make_unique<juce::AudioParameterFloat>("SUSTAIN", "Sustain", juce::NormalisableRange<float>{0.1f, 3.0f, }, 1.064f));
-    
+
     params.push_back(std::make_unique<juce::AudioParameterFloat>("RELEASE", "Release", juce::NormalisableRange<float>{0.1f, 3.0f, }, 0.759f));
 
     // OSC Select
 
     params.push_back(std::make_unique<juce::AudioParameterChoice>("OSC1WAVETYPE", "Osc 1 Wave Type", juce::StringArray{ "Sine","Saw","Square" }, 0));
 
-    // OSC 
+    // OSC
     params.push_back(std::make_unique<juce::AudioParameterFloat>("FREQ2", "Freq 2", juce::NormalisableRange<float>{0.0f, 1000.0f, }, 256.0f)); // imposto i delta a 0
 
     params.push_back(std::make_unique<juce::AudioParameterFloat>("FREQ3", "Freq 3", juce::NormalisableRange<float>{0.0f, 1000.0f, }, 910.5f));
@@ -365,11 +365,11 @@ juce::AudioProcessorValueTreeState::ParameterLayout SynthAudioProcessor::createP
     params.push_back(std::make_unique<juce::AudioParameterFloat>("FREQ4", "Freq 4", juce::NormalisableRange<float>{0.0f, 1000.0f, }, 662.6f));
 
     params.push_back(std::make_unique<juce::AudioParameterFloat>("GAIN1", "Gain 1", juce::NormalisableRange<float>{0.0f, 0.25f, }, 0.2f));   // volo il primo volume non a 0
-                                                                        
+
     params.push_back(std::make_unique<juce::AudioParameterFloat>("GAIN2", "Gain 2", juce::NormalisableRange<float>{0.0f, 0.25f, }, 0.058f));
-                                                                       
+
     params.push_back(std::make_unique<juce::AudioParameterFloat>("GAIN3", "Gain 3", juce::NormalisableRange<float>{0.0f, 0.25f, }, 0.086f));
-                                                                        
+
     params.push_back(std::make_unique<juce::AudioParameterFloat>("GAIN4", "Gain 4", juce::NormalisableRange<float>{0.0f, 0.25f, }, 0.052f));
 
     return {params.begin(), params.end() }; // ritorno con il vettore di paramentri

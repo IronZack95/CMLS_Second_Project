@@ -6,7 +6,7 @@
 
 //==============================================================================
 /**
-*       QUESTO è IL CERCELLO PRINCIPALE DEL PLUGIN
+*       QUESTO ï¿½ IL CERCELLO PRINCIPALE DEL PLUGIN
 */
 class SynthAudioProcessor  : public juce::AudioProcessor
 {
@@ -50,9 +50,9 @@ public:
 
     juce::AudioProcessorValueTreeState apvts; // creo l'oggetto tree state
 
-private:    
+private:
 
-    
+
     juce::Synthesiser synth;    // MAIN SYNTH
 
     juce::Synthesiser synth2;   // SYNTH ADDITIVI
@@ -64,5 +64,3 @@ private:
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SynthAudioProcessor)
 };
-
-

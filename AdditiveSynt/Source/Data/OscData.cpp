@@ -37,7 +37,7 @@ void OscData::setWaveType(const int choice)
             osc.initialise([](float x) {return x < 0.0f ? -1.0f : 1.0f; });
             break;
         default:
-            jassertfalse;       // se la scelta non è stata fatta blocca l'esecuzione
+            jassertfalse;       // se la scelta non Ã¨ stata fatta blocca l'esecuzione
             break;
     }
 
@@ -45,7 +45,7 @@ void OscData::setWaveType(const int choice)
 
 void OscData::setWaveFrequency(const int midiNoteNumber, const float delta)
 {
-    osc.setFrequency(juce::MidiMessage::getMidiNoteInHertz(midiNoteNumber) + delta);  // qui dico di controllare qual'è la nota in ingresso e settare la frequenza dell'oscillatore su quella
+    osc.setFrequency(juce::MidiMessage::getMidiNoteInHertz(midiNoteNumber) + delta);  // qui dico di controllare qual'Ã¨ la nota in ingresso e settare la frequenza dell'oscillatore su quella
 
 }
 

@@ -27,18 +27,16 @@ OscComponent::~OscComponent()
 
 void OscComponent::paint (juce::Graphics& g)
 {
-    g.fillAll(juce::Colours::black);
+    //g.fillAll(juce::Colours::black);
 }
 
 void OscComponent::resized()
 {
-    const auto bounds = getLocalBounds().reduced(10);
-    const auto Width = bounds.getWidth();
-    const auto Height = bounds.getWidth();
-    const auto BoxWidth = 100;
-    const auto BoxHeight = 20;
-    const auto BoxStartX = 10;
-    const auto BoxStartY = 10;
+    const auto division = 6;
+    //const auto bounds = getLocalBounds().reduced(division);
+    const auto bounds = getLocalBounds();
+    const auto WidthDivision = bounds.getWidth() / division;
+    const auto HeightDivision = bounds.getHeight() / division;
 
-    oscWaveSelector.setBounds(10, 10, BoxWidth, BoxHeight);
+    oscWaveSelector.setBounds(0, 0, BoxWidth, BoxHeight);
 }

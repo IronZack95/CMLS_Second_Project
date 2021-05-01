@@ -11,6 +11,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "StyleData.h"
 
 //==============================================================================
 /*
@@ -47,6 +48,8 @@ private:
     std::unique_ptr<SliderAttachment> Gain2Attachment;
     std::unique_ptr<SliderAttachment> Gain3Attachment;
     std::unique_ptr<SliderAttachment> Gain4Attachment;
+
+    RotaryStyle rotary;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AddittiveComponent)
 };

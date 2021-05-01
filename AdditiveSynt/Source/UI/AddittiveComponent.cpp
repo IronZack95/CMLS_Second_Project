@@ -41,34 +41,45 @@ AddittiveComponent::~AddittiveComponent()
 
 void AddittiveComponent::paint (juce::Graphics& g)
 {
-    g.fillAll(juce::Colours::black);
+    //g.fillAll(juce::Colours::black);
 }
 
 void AddittiveComponent::resized()
 {
-    const auto bounds = getLocalBounds().reduced(10);
-    const auto padding = 10;
-    const auto sliderWidth = bounds.getWidth() / 5 - padding;
-    const auto sliderHeight = bounds.getWidth() / 2;
-    const auto sliderStartX = 0;
-    const auto sliderStartYline1 = 0;
-    const auto sliderStartYline2 = bounds.getHeight() / 2;
+    const auto division = 6;
+    //const auto bounds = getLocalBounds().reduced(division);
+    const auto padding = 15;
+    const auto bounds = getLocalBounds();
+    const auto WidthDivision = bounds.getWidth() / division;
+    const auto HeightDivision = bounds.getHeight() / division;
+    const auto Width2 = 1.8f * WidthDivision;
+    const auto Height2 = 1.8f * HeightDivision;
+    const auto Width1 = 3.0f * WidthDivision;
+    const auto Height1 = 3.0f * HeightDivision;
 
-    Gain1.setBounds(sliderStartX,                       sliderStartYline2, sliderWidth, sliderHeight);
-    Gain2.setBounds(Gain1.getRight() + padding,         sliderStartYline2, sliderWidth, sliderHeight);
-    Gain3.setBounds(Gain2.getRight() + padding,         sliderStartYline2, sliderWidth, sliderHeight);
-    Gain4.setBounds(Gain3.getRight() + padding,         sliderStartYline2, sliderWidth, sliderHeight);
+    Gain1.setBounds(WidthDivision, HeightDivision, Width1, Height1);
+    Gain1.setCentrePosition(bounds.getWidth() / 2, bounds.getHeight() / 2);      // bottone grande   
 
-    freq2Slider.setBounds(Gain1.getRight() + padding,   sliderStartYline1, sliderWidth, sliderHeight);
-    freq3Slider.setBounds(Gain2.getRight() + padding,   sliderStartYline1, sliderWidth, sliderHeight);
-    freq4Slider.setBounds(Gain3.getRight() + padding,   sliderStartYline1, sliderWidth, sliderHeight );
+    Gain2.setBounds( WidthDivision, HeightDivision, Width2, Height2);
+    Gain2.setCentrePosition(2 * WidthDivision, HeightDivision);
+    Gain3.setBounds( WidthDivision, HeightDivision, Width2, Height2);
+    Gain3.setCentrePosition(4* WidthDivision, HeightDivision);
+    Gain4.setBounds(WidthDivision, HeightDivision, Width2, Height2);
+    Gain4.setCentrePosition(2* WidthDivision, 5*HeightDivision);
 
+    freq2Slider.setBounds(WidthDivision, HeightDivision, Width2, Height2);
+    freq2Slider.setCentrePosition( WidthDivision, 2*HeightDivision);
+    freq3Slider.setBounds(WidthDivision, HeightDivision, Width2, Height2);
+    freq3Slider.setCentrePosition(5*WidthDivision, 2*HeightDivision);
+    freq4Slider.setBounds(WidthDivision, HeightDivision, Width2, Height2);
+    freq4Slider.setCentrePosition(WidthDivision, 4*HeightDivision);
 
 }
 
 void AddittiveComponent::setSliderParams(juce::Slider& slider)
 {
-    slider.setSliderStyle(juce::Slider::SliderStyle::LinearVertical);
-    slider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, 50, 25);
+    slider.setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag);
+    slider.setTextBoxStyle(juce::Slider::NoTextBox, false, 50, 25);
     addAndMakeVisible(slider);
+    slider.setLookAndFeel(&rotary);
 }
