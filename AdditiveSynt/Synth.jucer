@@ -23,8 +23,8 @@
         <FILE id="EcTazi" name="OscData.h" compile="0" resource="0" file="Source/Data/OscData.h"/>
       </GROUP>
       <GROUP id="{78EFF068-CF1A-753A-1D1C-F83C798E8C2F}" name="UI">
-        <FILE id="HdvD3w" name="SynthPlugin3.jpg" compile="0" resource="1"
-              file="Source/UI/SynthPlugin3.jpg"/>
+        <FILE id="gFfexr" name="SynthPlugin4.jpg" compile="0" resource="1"
+              file="Source/UI/SynthPlugin4.jpg"/>
         <FILE id="GTbQMs" name="AnimationComponent.cpp" compile="1" resource="1"
               file="Source/UI/AnimationComponent.cpp"/>
         <FILE id="CL1UjF" name="AnimationComponent.h" compile="0" resource="1"

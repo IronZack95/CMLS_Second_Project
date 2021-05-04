@@ -20,19 +20,23 @@ AddittiveComponent::AddittiveComponent(juce::AudioProcessorValueTreeState& apvts
     freq3Attachment = std::make_unique<SliderAttachment>(apvts, "FREQ3", freq3Slider);
     freq4Attachment = std::make_unique<SliderAttachment>(apvts, "FREQ4", freq4Slider);
 
-    setSliderParams(freq2Slider);
-    setSliderParams(freq3Slider);
-    setSliderParams(freq4Slider);
+    rotary.setColor(0);         // colore del ring
+    rotary2.setColor(1);         // colore del ring
+    rotary3.setColor(2);         // colore del ring
+
+    setSliderParams(freq2Slider, rotary);
+    setSliderParams(freq3Slider, rotary);
+    setSliderParams(freq4Slider, rotary);
 
     Gain1Attachment = std::make_unique<SliderAttachment>(apvts, "GAIN1", Gain1);
     Gain2Attachment = std::make_unique<SliderAttachment>(apvts, "GAIN2", Gain2);
     Gain3Attachment = std::make_unique<SliderAttachment>(apvts, "GAIN3", Gain3);
     Gain4Attachment = std::make_unique<SliderAttachment>(apvts, "GAIN4", Gain4);
-
-    setSliderParams(Gain1);
-    setSliderParams(Gain2);
-    setSliderParams(Gain3);
-    setSliderParams(Gain4);
+    
+    setSliderParams(Gain1,rotary3);
+    setSliderParams(Gain2,rotary2);
+    setSliderParams(Gain3,rotary2);
+    setSliderParams(Gain4,rotary2);
 }
 
 AddittiveComponent::~AddittiveComponent()
@@ -76,10 +80,12 @@ void AddittiveComponent::resized()
 
 }
 
-void AddittiveComponent::setSliderParams(juce::Slider& slider)
+void AddittiveComponent::setSliderParams(juce::Slider& slider, RotaryStyle& rot)
 {
+
     slider.setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag);
     slider.setTextBoxStyle(juce::Slider::NoTextBox, false, 50, 25);
     addAndMakeVisible(slider);
-    slider.setLookAndFeel(&rotary);
+    slider.setLookAndFeel(&rot);
+    
 }

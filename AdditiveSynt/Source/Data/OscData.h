@@ -27,7 +27,7 @@ public:
     void setGain(float newGain);
 
 private:
-    int lastMidiNote;
+    int lastMidiNote = 0;
     juce::dsp::Oscillator<float> osc;       //creo oscillatore e relativo gain
     juce::dsp::Gain<float> gain;
 };

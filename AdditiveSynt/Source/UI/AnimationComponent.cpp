@@ -36,7 +36,7 @@ void Animation::paint(juce::Graphics& g)
     g.setColour(backGround);
     g.fillAll();
 
-    juce::Image background = juce::ImageCache::getFromMemory(BinaryData::SynthPlugin3_jpg, BinaryData::SynthPlugin3_jpgSize);
+    juce::Image background = juce::ImageCache::getFromMemory(BinaryData::SynthPlugin4_jpg, BinaryData::SynthPlugin4_jpgSize);
     g.drawImage(background, 0, 0, bounds.getWidth(),bounds.getHeight(),0,0,background.getWidth(),background.getHeight());
     //colore dei punti
     //g.setColour(getLookAndFeel().findColour(juce::Slider::thumbColourId));

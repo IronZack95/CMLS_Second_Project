@@ -27,7 +27,7 @@ public:
 
 private:
 
-    void setSliderParams(juce::Slider& slider);
+    void setSliderParams(juce::Slider& slider, RotaryStyle& rot);
 
     juce::Slider freq2Slider;
     juce::Slider freq3Slider;
@@ -50,6 +50,8 @@ private:
     std::unique_ptr<SliderAttachment> Gain4Attachment;
 
     RotaryStyle rotary;
+    RotaryStyle rotary2;
+    RotaryStyle rotary3;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AddittiveComponent)
 };

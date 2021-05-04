@@ -20,6 +20,7 @@
 #define bluGrigio       0xff5e6671
 #define azzurro         0xffd7eff6 
 #define azzurroElettrico         0xffd9e1e4
+#define azzurroDue         0xff4a86e8
 
 #define grigioBase      0xff848487
 #define grigioScuro     0xff2e2c33
@@ -37,7 +38,7 @@ static auto contorno = juce::Colour(back);
 static auto tick = juce::Colour(azzurro);
 
 //colori Animazione
-static auto electric = juce::Colour(azzurroElettrico);
+static auto electric = juce::Colour(azzurro);
 
 class RotaryStyle : public juce::LookAndFeel_V4
 {
@@ -48,9 +49,9 @@ public:
     }
 
     void drawRotarySlider(juce::Graphics& g, int x, int y, int width, int height, float sliderPos, float rotaryStartAngle, float rotaryEndAngle, juce::Slider& slider) override;
-
-    float topcolor;
+    void setColor(int color);
+    
 private:
-
+    juce::Colour topcolor;
 
 };

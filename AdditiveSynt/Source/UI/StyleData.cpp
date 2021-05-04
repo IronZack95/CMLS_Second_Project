@@ -38,6 +38,26 @@ void RotaryStyle::drawRotarySlider(juce::Graphics& g, int x, int y, int width, i
     g.setColour(contorno);
     g.drawEllipse(rx, ry, diameter, diameter, 2.5f);
 
-    g.setColour(ring);
+    //g.setColour(ring);
+    g.setColour(topcolor);
     g.drawEllipse(rx-1.0f, ry- 1.0f, diameter+2.0f, diameter + 2.0f, 1.0f);
+
+}
+
+void RotaryStyle::setColor(int color)
+{
+    switch (color)
+    {
+    case 0:
+        topcolor = juce::Colours::green;
+        break;
+    case 1:
+        topcolor = juce::Colours::red;
+        break;
+    case 2:
+        topcolor = tick;
+        break;
+    default:
+        break;
+    }
 }
