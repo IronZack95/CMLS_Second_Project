@@ -34,7 +34,6 @@ public:
     
 private:  
 
-    // 
     SynthAudioProcessor& audioProcessor;
     Animation anim;
     AddittiveComponent addOsc;              // rendo visibili i controlli degli oscillatori additivi

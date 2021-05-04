@@ -44,8 +44,8 @@ void AdsrComponent::resized()
     const auto bounds = getLocalBounds();
     const auto WidthDivision = bounds.getWidth() / (division);
     const auto HeightDivision = bounds.getHeight() / (division);
-    const auto Width2 = 1.2f * WidthDivision;
-    const auto Height2 = 1.2f * HeightDivision;
+    const auto Width2 = 1.0f * WidthDivision;
+    const auto Height2 = 1.0f * HeightDivision;
     const auto Width1 =  0.7f*WidthDivision;
     const auto Height1 = 0.7f* HeightDivision;
 

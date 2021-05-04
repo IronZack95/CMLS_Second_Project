@@ -45,8 +45,16 @@ void OscData::setWaveType(const int choice)
 
 void OscData::setWaveFrequency(const int midiNoteNumber, const float delta)
 {
-    osc.setFrequency(juce::MidiMessage::getMidiNoteInHertz(midiNoteNumber) + delta);  // qui dico di controllare qual'è la nota in ingresso e settare la frequenza dell'oscillatore su quella
+    lastMidiNote = midiNoteNumber;
+    double MainFreq = juce::MidiMessage::getMidiNoteInHertz(midiNoteNumber);
+    double newFreq = MainFreq * std::pow((double)2.0f, (double)delta / 12);         // secondo la formula Freq = note*s^(N/12)
+    osc.setFrequency(newFreq);  // qui dico di controllare qual'è la nota in ingresso e settare la frequenza dell'oscillatore su quella
 
+}
+
+void OscData::setWaveFrequencyRuntime(const float delta) {
+
+    setWaveFrequency(lastMidiNote, delta);
 }
 
 void OscData::getNextAudioBlock(juce::dsp::AudioBlock<float>& block)

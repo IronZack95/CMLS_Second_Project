@@ -11,26 +11,41 @@
 #include "AnimationComponent.h"
 #include "StyleData.h"
 
+Animation::Animation(juce::AudioBuffer<float>& p): buffer(p)
+{
+    setFramesPerSecond(fps);
+
+    //velRotazione = 0.04f;
+
+    numChannel = buffer.getNumChannels();
+    numSamples = buffer.getNumSamples();
+
+}
+
+
 void Animation::update()
 {
 }
 
 void Animation::paint(juce::Graphics& g)
 {
-
+    setNote(buffer);                        //ricalcolo l'audio buffer ogni fps
+    const auto bounds = getLocalBounds();
     // colore dello sfondo
     //g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
     g.setColour(backGround);
     g.fillAll();
 
+    juce::Image background = juce::ImageCache::getFromMemory(BinaryData::SynthPlugin3_jpg, BinaryData::SynthPlugin3_jpgSize);
+    g.drawImage(background, 0, 0, bounds.getWidth(),bounds.getHeight(),0,0,background.getWidth(),background.getHeight());
     //colore dei punti
     //g.setColour(getLookAndFeel().findColour(juce::Slider::thumbColourId));
     g.setColour(electric);
 
-    int radiusA = 100;
-    int radiusB = radiusA / 15;
-    radiusB = 0;
-    const auto bounds = getLocalBounds();
+    int radiusA = 88;
+    int radiusB = radiusA / 16;
+    //radiusB = 10;
+
     const float deltaX = bounds.getWidth() / 2.0f;
     const float deltaY = bounds.getHeight() / 2.0f;
 
@@ -40,10 +55,6 @@ void Animation::paint(juce::Graphics& g)
     //1.0f * (float)radius * std::sin((float)getFrameCounter() * velRotazione
     //(float)i * 0.06f
 
-    k += 0.02f;
-    if (k > 20)
-        k = 0;
-
     //velRotazione += 0.00001;
 
     for (auto i = 0; i < numberOfDots; ++i)
@@ -51,7 +62,7 @@ void Animation::paint(juce::Graphics& g)
 
         float fase = -t + (float)i * dotDist;
 
-        float LFO = (float)radiusB * (std::sin(k * fase) + std::sin(k * fase * 20 + 1)); 
+        float LFO = (float)radiusB * 2 * PrintVect[i];
 
         float modulo = (float)radiusA + LFO;
 
@@ -69,5 +80,22 @@ void Animation::paint(juce::Graphics& g)
 
 void Animation::resized()
 {
+}
+
+void Animation::setNote(juce::AudioBuffer<float>& buffer)
+{
+    int times =(int)(numSamples / numberOfDots);
+    const float *c = buffer.getReadPointer(0, numberOfDots);
+    /*
+        for (int i,k = 0; i < numberOfDots; ++i) {
+            k = i + times;
+            PrintVect[i] = c[k];
+            if (k > numSamples)                     // sto facendo un resasamples per fare un fit tra il numero di punti e il singolo sample
+                break;
+        }
+    */
+        for (int i= 0; i < numberOfDots; ++i) {
+            PrintVect[i] = c[i];                     // senza rifasamento, solo i primi campioni
+        }
 
 }

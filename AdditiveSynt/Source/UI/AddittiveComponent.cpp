@@ -52,10 +52,10 @@ void AddittiveComponent::resized()
     const auto bounds = getLocalBounds();
     const auto WidthDivision = bounds.getWidth() / division;
     const auto HeightDivision = bounds.getHeight() / division;
-    const auto Width2 = 1.8f * WidthDivision;
-    const auto Height2 = 1.8f * HeightDivision;
-    const auto Width1 = 3.0f * WidthDivision;
-    const auto Height1 = 3.0f * HeightDivision;
+    const auto Width2 = 1.6f * WidthDivision;
+    const auto Height2 = 1.6f * HeightDivision;
+    const auto Width1 = 2.5f * WidthDivision;
+    const auto Height1 = 2.5f * HeightDivision;
 
     Gain1.setBounds(WidthDivision, HeightDivision, Width1, Height1);
     Gain1.setCentrePosition(bounds.getWidth() / 2, bounds.getHeight() / 2);      // bottone grande   

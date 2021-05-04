@@ -25,13 +25,10 @@ void SynthVoice::stopNote(float velocity, bool allowTailOff)
 
 void SynthVoice::controllerMoved(int controllerNumber, int newControllerValue)
 {
-
 }
 
 void SynthVoice::pitchWheelMoved(int newPitchWheelValue)
 {
-
-
 }
 
 void SynthVoice::prepareToPlay(double sampleRate, int samplesPerBlock, int outputChannels)
@@ -45,7 +42,7 @@ void SynthVoice::prepareToPlay(double sampleRate, int samplesPerBlock, int outpu
 
     // inizializzo il Primo Oscillatore
     oscillatore.prepareToPlay(spec);
-    //osc.setFrequency(220.0f);         // frequenza OPZIONALE dell' oscillatore
+    
     oscillatore.setGain(0.0f);          // inizializzo a zero il volume
 
     isPrepared = true;                  // ok siamo pronti a partire
@@ -59,10 +56,12 @@ void SynthVoice::update(const float attack, const float decay, const float susta
 void SynthVoice::updateDelta(const float delta)
 {
     delta_freq = delta;
+    oscillatore.setWaveFrequencyRuntime(delta_freq); // frequenza OPZIONALE dell' oscillatore
 }
 
 void SynthVoice::updateGain(const float gain)
 {
+    voice_gain = gain;
     oscillatore.setGain(gain);
 }
 

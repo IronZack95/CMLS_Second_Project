@@ -50,6 +50,9 @@ public:
 
     juce::AudioProcessorValueTreeState apvts; // creo l'oggetto tree state
 
+    juce::AudioBuffer<float> Pbuffer;
+
+
 private:
 
 

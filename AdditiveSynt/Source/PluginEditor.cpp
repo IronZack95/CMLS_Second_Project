@@ -4,7 +4,7 @@
 
 //==============================================================================
 SynthAudioProcessorEditor::SynthAudioProcessorEditor(SynthAudioProcessor& p)
-    : AudioProcessorEditor(&p), audioProcessor(p), oscSel (audioProcessor.apvts, "OSC1WAVETYPE"), adsr (audioProcessor.apvts), addOsc (audioProcessor.apvts) //inizializzatore
+    : AudioProcessorEditor(&p), audioProcessor(p), oscSel (audioProcessor.apvts, "OSC1WAVETYPE"), adsr (audioProcessor.apvts), addOsc (audioProcessor.apvts), anim(audioProcessor.Pbuffer) //inizializzatore
 {
 
     setSize(700, 400);

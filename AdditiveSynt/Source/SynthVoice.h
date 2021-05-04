@@ -23,9 +23,10 @@ public:
     
     OscData& getOscillator() { return oscillatore; }        // questo serve a comunicare con la funzione OscData che contiene tutti i parametri degli oscillatori
 
-    float delta_freq;
-
 private:
+
+    float delta_freq;                       // ogni voce è composto da frequenza e ampiezza
+    float voice_gain;
 
     AdsrData adsr;                          // Creo oggetto ADSR
     juce::AudioBuffer<float> synthBuffer;   //creo un nuovo buffer vuoto in modo tale da evitare i "click" generati assieme alle note.

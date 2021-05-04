@@ -12,22 +12,17 @@
 #include <JuceHeader.h>
 #include "StyleData.h"
 
+#define numberOfDots 60         // numero di punti sulla geometria
+#define dotDist  0.06f          // distanza tra i punti nell'animazione
+#define fps 60                 //frame per secondo
+
 //==============================================================================
 class Animation : public juce::AnimatedAppComponent
 {
 public:
-    float k;
-    float velRotazione = 0.33f;
-    int fps = 60;
-    const float dotDist = 0.06f;
-    const int numberOfDots = 60;
     //==============================================================================
-    Animation()
-    {
-        setFramesPerSecond(fps);
-        k = 0;
-        //velRotazione = 0.04f;
-    }
+
+    Animation(juce::AudioBuffer<float>&);
 
     void update() override;
 
@@ -35,7 +30,17 @@ public:
 
     void resized() override;
 
+    void setNote(juce::AudioBuffer<float>&);
+    
 private:
+    int numSamples;
+    int numChannel;
+
+    float velRotazione = 0.33f;         //
+    float PrintVect[numberOfDots];           //vettore che contiene i punti proiettati sulla geometria
+    
+    juce::AudioBuffer<float>& buffer;   // faccio riferimento all'oggetto buffer esistente
+    
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(Animation)
 };

@@ -297,6 +297,9 @@ void SynthAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
     }
 
     synth4.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
+
+    Pbuffer = buffer;       // serve a copiare il buffer per l'animazione
+
 }
 
 //==============================================================================
@@ -358,19 +361,19 @@ juce::AudioProcessorValueTreeState::ParameterLayout SynthAudioProcessor::createP
     params.push_back(std::make_unique<juce::AudioParameterChoice>("OSC1WAVETYPE", "Osc 1 Wave Type", juce::StringArray{ "Sine","Saw","Square" }, 0));
 
     // OSC
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("FREQ2", "Freq 2", juce::NormalisableRange<float>{0.0f, 1000.0f, }, 256.0f)); // imposto i delta a 0
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("FREQ2", "Freq 2", juce::NormalisableRange<float>{-5.0f, 5.0f, }, 0.0f)); // imposto i delta a 0
 
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("FREQ3", "Freq 3", juce::NormalisableRange<float>{0.0f, 1000.0f, }, 910.5f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("FREQ3", "Freq 3", juce::NormalisableRange<float>{-5.0f, 5.0f, }, 0.0f));
 
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("FREQ4", "Freq 4", juce::NormalisableRange<float>{0.0f, 1000.0f, }, 662.6f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("FREQ4", "Freq 4", juce::NormalisableRange<float>{-5.0f, 5.0f, }, 0.0f));
 
     params.push_back(std::make_unique<juce::AudioParameterFloat>("GAIN1", "Gain 1", juce::NormalisableRange<float>{0.0f, 0.25f, }, 0.2f));   // volo il primo volume non a 0
 
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("GAIN2", "Gain 2", juce::NormalisableRange<float>{0.0f, 0.25f, }, 0.058f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("GAIN2", "Gain 2", juce::NormalisableRange<float>{0.0f, 0.25f, }, 0.0f));
 
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("GAIN3", "Gain 3", juce::NormalisableRange<float>{0.0f, 0.25f, }, 0.086f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("GAIN3", "Gain 3", juce::NormalisableRange<float>{0.0f, 0.25f, }, 0.0f));
 
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("GAIN4", "Gain 4", juce::NormalisableRange<float>{0.0f, 0.25f, }, 0.052f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("GAIN4", "Gain 4", juce::NormalisableRange<float>{0.0f, 0.25f, }, 0.0f));
 
     return {params.begin(), params.end() }; // ritorno con il vettore di paramentri
 }

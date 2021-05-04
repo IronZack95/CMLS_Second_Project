@@ -20,12 +20,14 @@ public:
     void prepareToPlay(juce::dsp::ProcessSpec& spec);
     void setWaveType(const int choice);
     void setWaveFrequency(const int MidiNoteNumber, const float delta);
+    void setWaveFrequencyRuntime(const float delta);
     void getNextAudioBlock(juce::dsp::AudioBlock<float>& block);
 
     // Variabili di GAIN
     void setGain(float newGain);
 
 private:
+    int lastMidiNote;
     juce::dsp::Oscillator<float> osc;       //creo oscillatore e relativo gain
     juce::dsp::Gain<float> gain;
 };
