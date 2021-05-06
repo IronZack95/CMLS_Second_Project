@@ -24,7 +24,7 @@ public:
     OscData& getOscillator() { return oscillatore; }        // questo serve a comunicare con la funzione OscData che contiene tutti i parametri degli oscillatori
 
 private:
-
+    float velocity = 0;
     float delta_freq = 0;                       // ogni voce è composto da frequenza e ampiezza
     float voice_gain = 0;
 

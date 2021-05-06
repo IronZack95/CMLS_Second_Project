@@ -97,5 +97,4 @@ void Animation::setNote(juce::AudioBuffer<float>& buffer)
         for (int i= 0; i < numberOfDots; ++i) {
             PrintVect[i] = c[i];                     // senza rifasamento, solo i primi campioni
         }
-
 }

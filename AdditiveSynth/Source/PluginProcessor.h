@@ -62,7 +62,7 @@ private:
     juce::Synthesiser synth3;
     juce::Synthesiser synth4;
 
-    juce::AudioProcessorValueTreeState::ParameterLayout createParameters();
+    juce::AudioProcessorValueTreeState::ParameterLayout createParameters(); // oggetto tree state
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SynthAudioProcessor)

@@ -8,9 +8,10 @@ bool SynthVoice::canPlaySound(juce::SynthesiserSound* sound)
 
 void SynthVoice::startNote(int midiNoteNumber, float velocity, juce::SynthesiserSound* sound, int currentPitchWheelPosition)
 {
+    SynthVoice::velocity = velocity;
+    updateGain(voice_gain*velocity);
     oscillatore.setWaveFrequency(midiNoteNumber , delta_freq);      //qui è dove processo la nota midi
     adsr.noteOn();                                          //qui è dove inizia l'envelope dell'ADSR
-
 }
 
 void SynthVoice::stopNote(float velocity, bool allowTailOff)
@@ -62,7 +63,7 @@ void SynthVoice::updateDelta(const float delta)
 void SynthVoice::updateGain(const float gain)
 {
     voice_gain = gain;
-    oscillatore.setGain(gain);
+    oscillatore.setGain(gain*velocity);
 }
 
 void SynthVoice::renderNextBlock(juce::AudioBuffer<float> &outputBuffer, int startSample, int numSamples)

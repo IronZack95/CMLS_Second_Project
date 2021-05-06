@@ -10,7 +10,6 @@
 
 #include "StyleData.h"
 
-
 void RotaryStyle::drawRotarySlider(juce::Graphics& g, int x, int y, int width, int height, float sliderPos, float rotaryStartAngle, float rotaryEndAngle, juce::Slider& slider)
 {
     float diameter = juce::jmin(width, height) * 0.9;

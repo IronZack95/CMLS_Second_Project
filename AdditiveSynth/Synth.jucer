@@ -2,8 +2,8 @@
 
 <JUCERPROJECT id="y4eCa0" name="Synth" projectType="audioplug" useAppConfig="0"
               addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1"
-              pluginCharacteristicsValue="pluginIsMidiEffectPlugin,pluginIsSynth,pluginProducesMidiOut,pluginWantsMidiIn"
-              pluginFormats="buildStandalone">
+              pluginCharacteristicsValue="pluginIsSynth,pluginProducesMidiOut,pluginWantsMidiIn"
+              pluginFormats="buildStandalone,buildVST3">
   <MAINGROUP id="sOTIOZ" name="Synth">
     <GROUP id="{E14D2188-C3F8-6576-45D7-2B93B9D498C9}" name="Source">
       <FILE id="fGBCXH" name="SynthSound.h" compile="0" resource="0" file="Source/SynthSound.h"/>
