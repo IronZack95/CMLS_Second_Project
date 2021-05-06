@@ -1,5 +1,5 @@
 # CMLS_Second_Project
- **First Project of Computer Music** \- _Language and Systems_ \- **Homework 2** 
+ **Second Project of Computer Music** \- _Language and Systems_ \- **Homework 2** 
  
  ### Authors \- ***Group 16*** :
 - [Zaccaria Eliseo Carrettoni](https://github.com/IronZack95)
