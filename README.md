@@ -10,6 +10,9 @@
 ## JUCE File:
 - Additive Synth
 
+## VST3 File:
+- Synth.vst3
+
 ## OVERLEAF LaTeX REPORT LINK:
 [OverLeaf Report Link](https://it.overleaf.com/project/6079618afecc78176a30d173)
 
