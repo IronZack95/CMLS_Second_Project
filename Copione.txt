@@ -5,6 +5,17 @@
 //// ZACCARIA
 
 - STRUCTURE OF THE SYNTHESIZER
+In order to make our plugin more professional,
+implement all the Goals we have set ourselves,
+and the possibility of future expansions,
+we have organized the division of the file system into two main parts,
+the front-end and the back-end.
+In the production pipeline we started by making concepts for the design of the plug in,
+drawing it by hand, for better visualize the future position of each components.
+And in the front end code we have instantiated in the AudioPluginEditor class one object for
+each components that are displayed on the interface, Starting by Custom Objects,
+such as animation, rotary and ADSR.
+Each component depends on a custom class called StyleData which manages all the graphic style of the plugin, and the colour Palette.
 
 ////    ALESSANDRO
 
