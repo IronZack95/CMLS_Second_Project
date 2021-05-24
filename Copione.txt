@@ -32,3 +32,11 @@ Each component depends on a custom class called StyleData which manages all the 
 //// LUCA
 
 - GOALS FOR THE FRONT END
+We focused our attention on designing an interface graphycally elegant but also easy to interpret
+in order to obtain a layout that was pleasant but also respectful of the synthesizer’s architecture logic.
+We built a layer structure:
+1) Over the plugin editor, we have the component which controls the background and the animations.
+2) Then, we have the additive component, with a central rotary slider which controls the gain of the first oscillator and the couples of rotary sliders of gain and frequency which control the other oscillators.
+3) Afterward, we added the oscillator box component, a drop-down menu that allows to select the type of waveform.
+4) Finally, we have the four rotary sliders that controls the Attack, the Decay, the Sustain and the Release.
+
