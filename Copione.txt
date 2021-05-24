@@ -2,6 +2,14 @@
 
 - ADDITIVE SYNTHESIS
 
+Good morning everybody. Our goal was to create an additive synthesis synthesiser. Additive synthesis is a sound generation method that involves the combination and the sum of simple waveforms.
+
+Our synth is composed by 4 different oscillators and an ADSR section. The user can control the gain of each oscillator, the ADSR four parameters and the frequency of three oscillators.
+The fourth oscillator frequency is controlled by an external MIDI device or keyboard and we also implemented polyphony to allow the user to play multiple notes together or chords.
+
+Moreover, we added a combo box in order to give the possibility of choice between 3 different waveforms.
+
+
 //// ZACCARIA
 
 - STRUCTURE OF THE SYNTHESIZER
