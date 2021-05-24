@@ -10,6 +10,9 @@
 ## JUCE File:
 - Additive Synth
 
+## YouTube Official Video Teaser:
+https://youtu.be/GW0AFX2vli4
+
 ## VST3 File:
 - Synth.vst3
 
