@@ -2,10 +2,13 @@
 
 - ADDITIVE SYNTHESIS
 
-Good morning everybody. Our goal was to create an additive synthesis synthesiser. Additive synthesis is a sound generation method that involves the combination and the sum of simple waveforms.
+Good morning everybody. Our goal was to create an additive synthesis synthesiser.
+Additive synthesis is a sound generation method that involves the combination and the sum of simple waveforms.
 
-Our synth is composed by 4 different oscillators and an ADSR section. The user can control the gain of each oscillator, the ADSR four parameters and the frequency of three oscillators.
-The fourth oscillator frequency is controlled by an external MIDI device or keyboard and we also implemented polyphony to allow the user to play multiple notes together or chords.
+Our synth is composed by 4 different oscillators and an ADSR section. The user can control the gain of each oscillator,
+the ADSR four parameters and the frequency of three oscillators.
+The fourth oscillator frequency is controlled by an external MIDI device or keyboard and we also
+implemented polyphony to allow the user to play multiple notes together or chords.
 
 Moreover, we added a combo box in order to give the possibility of choice between 3 different waveforms.
 
@@ -23,11 +26,12 @@ drawing it by hand, for better visualize the future position of each components.
 And in the front end code we have instantiated in the AudioPluginEditor class one object for
 each components that are displayed on the interface, Starting by Custom Objects,
 such as animation, rotary and ADSR.
-Each component depends on a custom class called StyleData which manages all the graphic style of the plugin, and the colour Palette.
+Each component depends on a custom class called StyleData which manages all the graphic style of the plugin,
+and the colour Palette.
 
 ////    ALESSANDRO
 
-- GOALS FOR THE BACK END
+
 
 As can be seen in the slide, the Back-end part of the project is composed of 5 classes.
 The two at the bottom, adsrData and oscData handles the methods for the machine to operate on the signal when the knobs are turned.
@@ -35,8 +39,11 @@ The remaining three, instead, directly manipulate the signal.
 They do so by means of operating on different buffers.
 Firstly, in the PluginProcessor class the MidiBuffer is handled and the signal is then sent to the SynthVoice class.
 In here, it is inserted into the SynthBuffer which is later on added to the AudioBuffer and then sent to the output.
-Furthermore, the PluginProcessor class also controls the ValueTreeState object which is an array containing 
+Furthermore, the PluginProcessor class also controls the ValueTreeState object which is an array containing
 all the informations about each object visible on the screen such as the knobs or the combobox.
+
+- GOALS FOR THE BACK END
+
 The goals we have managed to achieve for the back-end part of the project are:
  - polyphony
  - Velocity sensitivity
@@ -51,7 +58,7 @@ We focused our attention on designing an interface graphycally elegant but also 
 in order to obtain a layout that was pleasant but also respectful of the synthesizer’s architecture logic.
 We built a layer structure:
 1) Over the plugin editor, we have the component which controls the background and the animations.
-2) Then, we have the additive component, with a central rotary slider which controls the gain of the first oscillator and the couples of rotary sliders of gain and frequency which control the other oscillators.
+2) Then, we have the additive component, with a central rotary slider which controls the gain of the first oscillator
+and the couples of rotary sliders of gain and frequency which control the other oscillators.
 3) Afterward, we added the oscillator box component, a drop-down menu that allows to select the type of waveform.
 4) Finally, we have the four rotary sliders that controls the Attack, the Decay, the Sustain and the Release.
-
