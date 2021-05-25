@@ -9,7 +9,7 @@ The fourth oscillator frequency is controlled by an external MIDI device or keyb
 
 Moreover, we added a combo box in order to give the possibility of choice between 3 different waveforms. 
 
-Furthermore, I want to specify that the music of the previous video was made by our synthesiser and a simple drum kit.
+Furthermore, I want to specify that the music of the previous video was made by our synthesiser and a simple drum kit. The video is also available on YouTube and I will also share the link on the chat. https://www.youtube.com/watch?v=GW0AFX2vli4
 
 
 //// ZACCARIA
