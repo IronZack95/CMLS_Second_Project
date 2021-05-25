@@ -10,7 +10,9 @@ the ADSR four parameters and the frequency of three oscillators.
 The fourth oscillator frequency is controlled by an external MIDI device or keyboard and we also
 implemented polyphony to allow the user to play multiple notes together or chords.
 
-Moreover, we added a combo box in order to give the possibility of choice between 3 different waveforms.
+Moreover, we added a combo box in order to give the possibility of choice between 3 different waveforms. 
+
+Furthermore, I want to specify that the music of the previous video was made by our synthesiser and a simple drum kit. The video is also available on YouTube and I will also share the link on the chat. https://www.youtube.com/watch?v=GW0AFX2vli4
 
 
 //// ZACCARIA
