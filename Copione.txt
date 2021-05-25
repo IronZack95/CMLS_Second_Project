@@ -29,6 +29,21 @@ Each component depends on a custom class called StyleData which manages all the 
 
 - GOALS FOR THE BACK END
 
+As can be seen in the slide, the Back-end part of the project is composed of 5 classes.
+The two at the bottom, adsrData and oscData handles the methods for the machine to operate on the signal when the knobs are turned.
+The remaining three, instead, directly manipulate the signal.
+They do so by means of operating on different buffers.
+Firstly, in the PluginProcessor class the MidiBuffer is handled and the signal is then sent to the SynthVoice class.
+In here, it is inserted into the SynthBuffer which is later on added to the AudioBuffer and then sent to the output.
+Furthermore, the PluginProcessor class also controls the ValueTreeState object which is an array containing 
+all the informations about each object visible on the screen such as the knobs or the combobox.
+The goals we have managed to achieve for the back-end part of the project are:
+ - polyphony
+ - Velocity sensitivity
+ - ADSR envelope
+ - Real-time parameter' response
+ - different waveforms
+
 //// LUCA
 
 - GOALS FOR THE FRONT END
