@@ -12,7 +12,6 @@ Moreover, we added a combo box in order to give the possibility of choice betwee
 Furthermore, I want to specify that the music of the previous video was made by our synthesiser and a simple drum kit.
 
 
-
 //// ZACCARIA
 
 - STRUCTURE OF THE SYNTHESIZER
